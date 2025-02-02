@@ -1,99 +1,141 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# TaskFlow - Collaborative Task Management System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+TaskFlow is a powerful, flexible task management system designed for teams to collaborate efficiently. Built with **NestJS**, **GraphQL**, and **Prisma**, TaskFlow allows users to create projects, assign tasks, track progress, and receive real-time updates.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🚀 Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **User Authentication**: Secure sign-up and login with JWT-based authentication.
+- **Role-Based Access Control (RBAC)**: Manage permissions with Admin, Manager, and Member roles.
+- **Project Management**: Create, update, and delete projects.
+- **Task Management**: Assign tasks to team members, set priorities, and track deadlines.
+- **Real-Time Updates**: Get live notifications on task status changes using GraphQL subscriptions.
+- **Advanced Authorization**: Protect sensitive data with custom guards and directives.
+- **Scalable Architecture**: Optimized for performance and easy deployment.
 
-## Project setup
+---
 
+## 🛠️ Tech Stack
+
+- **Backend:** NestJS
+- **API:** GraphQL with Apollo Server
+- **ORM:** Prisma
+- **Database:** PostgreSQL
+- **Authentication:** JWT
+- **Real-Time:** GraphQL Subscriptions (WebSockets)
+- **Deployment:** Docker, CI/CD (GitHub Actions)
+
+---
+
+## 📦 Installation
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/your-username/taskflow.git
+   cd taskflow
+   ```
+
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set Up Environment Variables:**
+   Create a `.env` file:
+   ```env
+   DATABASE_URL=postgresql://user:password@localhost:5432/taskflow
+   JWT_SECRET=your_jwt_secret
+   ```
+
+4. **Run the Development Server:**
+   ```bash
+   npm run start:dev
+   ```
+
+---
+
+## 🔑 Authentication
+
+- **Register:** `registerUser` mutation
+- **Login:** `login` mutation (returns JWT)
+- **Protected Routes:** Use JWT in the Authorization header
+
+Example:
 ```bash
-$ npm install
+Authorization: Bearer <your-token>
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## 📊 GraphQL Playground
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+Access the GraphQL Playground at:
+```
+http://localhost:3000/graphql
 ```
 
-## Run tests
+You can perform queries, mutations, and subscriptions directly in the playground.
 
+---
+
+## 🚀 Deployment
+
+1. **Build the Project:**
+   ```bash
+   npm run build
+   ```
+
+2. **Run in Production Mode:**
+   ```bash
+   npm run start:prod
+   ```
+
+3. **Docker Deployment:**
+   ```bash
+   docker build -t taskflow .
+   docker run -p 3000:3000 taskflow
+   ```
+
+---
+
+## ✅ Testing
+
+Run unit and integration tests using Jest:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run test
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+For end-to-end (E2E) testing:
 ```bash
-$ npm install -g mau
-$ mau deploy
+npm run test:e2e
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## 💡 Contributing
 
-Check out a few resources that may come in handy when working with NestJS:
+Contributions are welcome! Please open an issue or submit a pull request for any improvements.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-xyz`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature-xyz`)
+5. Open a pull request
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 📜 License
 
-## Stay in touch
+This project is licensed under the [MIT License](LICENSE).
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 🤝 Acknowledgments
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- NestJS Team
+- Prisma Contributors
+- GraphQL Community
+
+Happy coding! 🎉
+
