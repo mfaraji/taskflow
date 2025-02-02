@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Enum for User Roles
+enum Role {
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(MEMBER)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  projects  Project[]  @relation("UserProjects") // A user can own multiple projects
+  userTasks UserTask[]
+  tasks     Task[]
+}
+
+// Project Model
+model Project {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  owner User   @relation("UserProjects", fields: [ownerId], references: [id])
+  tasks Task[]
+}
+
+// Task Model
+model Task {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  status      String    @default("PENDING")
+  dueDate     DateTime?
+  priority    Int       @default(1)
+  projectId   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relationships
+  project   Project    @relation(fields: [projectId], references: [id])
+  userTasks UserTask[] // Many-to-many relation via UserTask
+  User      User?      @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+// Join Table for Many-to-Many User-Task Relationship
+model UserTask {
+  userId String
+  taskId String
+
+  // Relationships
+  user User @relation(fields: [userId], references: [id])
+  task Task @relation(fields: [taskId], references: [id])
+
+  @@id([userId, taskId]) // Composite primary key to prevent duplicate entries
+}
