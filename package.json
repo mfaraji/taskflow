@@ -21,7 +21,7 @@
     "migrate": "cross-env NODE_ENV=development prisma migrate dev"
   },
   "dependencies": {
-    "@apollo/server": "^4.11.3",
+    "@apollo/server": "^4.13.0",
     "@nestjs/apollo": "^13.0.2",
     "@nestjs/common": "^11.0.7",
     "@nestjs/config": "^4.0.0",
